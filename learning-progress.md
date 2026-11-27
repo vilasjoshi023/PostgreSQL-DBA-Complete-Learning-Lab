@@ -20,7 +20,7 @@
 
 | # | Topic | Status | Evidence / remaining work |
 |---:|---|---|---|
-| 01 | Database fundamentals | In progress | Covered database/DBMS/RDBMS, database vs server vs instance, schema/table/row/column/types, OLTP/OLAP, primary/foreign keys, constraints and relationships. On current VILASLAB1 PG18.4, created departments and employees, inserted 3 rows into each, verified PK/UNIQUE/NOT NULL/CHECK/FK metadata using \\d, and confirmed expected rejection of a nonexistent department FK and duplicate department PK. Atomicity transaction practical verified: created acid_accounts, performed two updates inside BEGIN, observed interim balances, and ROLLBACK restored original balances. Consistency practical verified: CHECK (balance >= 0) rejected an update to -500, and the original balance remained unchanged. Remaining: Isolation, Durability, normalization, and PostgreSQL use cases/architecture overview. |
+| 01 | Database fundamentals | In progress | Covered database/DBMS/RDBMS, database vs server vs instance, schema/table/row/column/types, OLTP/OLAP, primary/foreign keys, constraints and relationships. On current VILASLAB1 PG18.4, created departments and employees, inserted 3 rows into each, verified PK/UNIQUE/NOT NULL/CHECK/FK metadata using \\d, and confirmed expected rejection of a nonexistent department FK and duplicate department PK. Atomicity transaction practical verified: created acid_accounts, performed two updates inside BEGIN, observed interim balances, and ROLLBACK restored original balances. Consistency practical verified: CHECK (balance >= 0) rejected an update to -500, and the original balance remained unchanged. Isolation two-session lock-wait demonstration remains unverified. Durability concepts (WAL and crash recovery) have been introduced; restart-persistence practical is pending. Normalization and PostgreSQL use cases/architecture overview remain. |
 | 02 | PostgreSQL installation and prerequisites | Historical Practised; current PG18 lab verify | PostgreSQL 17.11 installation was previously practised on CentOS Stream 9. Current VILASLAB1 PG18.4 service/version/path are known from the active learning thread. Revisit installation runbook, dependency handling, sizing, SELinux/firewall and rollback safely. |
 | 03 | PostgreSQL architecture | Partial | Basic architecture introduction and source reading. Deep process lifecycle, memory, WAL, MVCC, background workers, storage and query execution labs remain. |
 | 04 | psql and pgAdmin | Partial | psql connections, meta-commands and object inspection practised. pgAdmin server registration/query tool/monitoring lab remains unverified. |
@@ -72,7 +72,7 @@ Do not assume these commands were run on the current VILASLAB1 PG18.4 environmen
 
 ## Current next action
 
-Continue Topic 01 with the remaining ACID properties (Consistency, Isolation, Durability), normalization and PostgreSQL use cases/architecture overview. Atomicity rollback practical is verified.
+Continue Topic 01: complete the two-session Isolation lock-wait practical, execute the Durability commit/restart verification, then cover normalization and PostgreSQL use cases/architecture overview. Atomicity and Consistency practicals are verified.
 
 ## Completion standard
 
