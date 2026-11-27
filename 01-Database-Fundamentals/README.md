@@ -70,3 +70,17 @@ Remaining ACID properties: Consistency, Isolation and Durability. Topic 01 remai
 **Conclusion:** The CHECK constraint prevented an invalid balance, demonstrating the Consistency property.
 
 Remaining ACID properties: Isolation and Durability. Topic 01 remains In progress.
+
+
+## ACID practical — Durability lesson
+
+**Concepts introduced; practical not yet verified** on VILASLAB1 / PostgreSQL 18.4.
+
+- Durability means committed changes should survive a database crash or restart.
+- PostgreSQL uses Write-Ahead Logging (WAL) to support crash recovery.
+- Under normal synchronous commit settings, required WAL records are flushed to durable storage before a successful commit is acknowledged.
+- During crash recovery, PostgreSQL replays WAL as needed.
+
+**Pending lab:** Insert and commit a test row in isolation_demo, verify it, perform a controlled restart of the PostgreSQL 18 service, reconnect and verify the committed row remains. Awaiting actual user execution output; not marked practised.
+
+**Isolation status:** The two-session lock-wait practical is still pending; backend PIDs were identified, but the monitoring output did not capture a Lock wait.
