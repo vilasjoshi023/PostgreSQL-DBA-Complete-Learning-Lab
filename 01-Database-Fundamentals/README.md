@@ -55,3 +55,18 @@ The constraints/relationships practical has been executed and output reviewed on
 **Conclusion:** PostgreSQL rolled back both updates together, demonstrating Atomicity (all or nothing).
 
 Remaining ACID properties: Consistency, Isolation and Durability. Topic 01 remains In progress.
+
+
+## ACID practical — Consistency
+
+**Status: Practised and verified** on VILASLAB1 / PostgreSQL 18.4 / dba_training.
+
+- Queried acid_accounts and confirmed balances of 10000.00 and 5000.00.
+- Attempted to update Account A to -500; PostgreSQL rejected it due to acid_accounts_balance_check.
+- Queried the table again and confirmed original balances remained unchanged.
+- Used \\d acid_accounts to verify CHECK (balance >= 0::numeric), primary key and NOT NULL metadata.
+- A repeated CREATE TABLE returned relation already exists because the table was already present; no drop/recreate was needed.
+
+**Conclusion:** The CHECK constraint prevented an invalid balance, demonstrating the Consistency property.
+
+Remaining ACID properties: Isolation and Durability. Topic 01 remains In progress.
