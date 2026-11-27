@@ -1,112 +1,79 @@
 # PostgreSQL DBA Learning Progress
 
-**Curriculum:** PostgreSQL DBA Master Index — 26 topics  
-**Lab:** CentOS Stream 9, PostgreSQL 17.11, hostname `postgresql-lab1`  
-**Progress snapshot:** 2026-11-27
+**Curriculum baseline:** PostgreSQL DBA Master Index — 26 topics  
+**Supplementary source review:** 10 uploaded PDFs consolidated on 2026-11-27  
+**Current active learning lab:** VILASLAB1, PostgreSQL 18.4  
+**Earlier lab history:** postgresql-lab1, PostgreSQL 17.11 (kept separate)
 
 ## Summary
 
-| Level | Topics | Current position |
+| Level | Topics | Status snapshot |
 |---|---:|---|
-| Level 1 — Fundamentals and SQL | 01–06 | 01–05 partial/practised; 06 not started |
-| Level 2 — Core administration | 07–12 | 07 partial; 08–09 practised; 10 in progress; 11–12 not started |
-| Level 3 — Backup, recovery and performance | 13–17 | Not started |
-| Level 4 — Advanced and enterprise | 18–26 | Not started |
+| Level 1 — Fundamentals and SQL | 01–06 | Topic 01 in progress; practical verification pending. Other historical topic evidence remains recorded below. |
+| Level 2 — Core administration | 07–12 | Historical hands-on coverage exists for 07–10 in the earlier PG17 lab; Topic 10 connectivity tests were pending in that record. |
+| Level 3 — Backup, recovery and performance | 13–17 | Not started in the structured course |
+| Level 4 — Advanced and enterprise | 18–26 | Not started in the structured course |
 
-**Topics reached:** 10 of 26 (38.5%). This is a topic-reach indicator, not a claim that 38.5% of all syllabus subtopics are mastered.
+**Important:** Reading a PDF or discussing a topic is not the same as completing a lab. Status is evidence-based.
 
 ## Topic tracker
 
-| # | Topic | Status | Confirmed coverage / remaining work |
+| # | Topic | Status | Evidence / remaining work |
 |---:|---|---|---|
-| 01 | Database fundamentals | Partial | Basic database/DBMS/RDBMS, database/schema/table/row/column, primary key, simple constraints and PostgreSQL introduction. Deeper OLTP/OLAP, ACID, normalization, relationships and architecture overview need review/practice. |
-| 02 | PostgreSQL installation and prerequisites | Practised | Installed PostgreSQL 17.11 on CentOS Stream 9; package/version checks, initialization/service checks, service enablement, data/config locations and basic validation. Revisit detailed resource/filesystem planning and install troubleshooting as a formal runbook. |
-| 03 | PostgreSQL architecture | Partial | Basic client/server and architecture introduction. Postmaster/backend detail, shared memory, background workers, WAL/checkpoints, memory internals and data directory/storage internals remain. |
-| 04 | psql and pgAdmin | Partial | psql connection/disconnection, database/schema/table/object inspection, meta-commands and SHOW. pgAdmin installation/registration/query-tool practical is not confirmed. |
-| 05 | SQL fundamentals | Partial | Created tables/rows; practised CREATE, INSERT, SELECT, UPDATE, DELETE, primary key, WHERE, ORDER BY and COUNT. Broader DDL/DML/DQL/DCL/TCL, grouping, aggregates, NULL handling, casts and transactions remain. |
-| 06 | Advanced SQL and database objects | Not started | Joins, subqueries, CTEs, recursive CTEs, window functions, views/materialized views, sequences/identity, functions/procedures/triggers, extensions, JSON/JSONB and arrays. |
-| 07 | Database, schema and tablespace administration | Partial | Created database `dba_training`, schema `dba_training`, tables; explored ownership and search_path. Tablespaces, dependencies, database/table/index sizing, provisioning and decommissioning remain. |
-| 08 | Users, roles and privileges | Practised | Created login/group roles; GRANT/REVOKE; CONNECT/USAGE/table permissions; separate-user login and DML validation; default privileges; role membership; read-oriented reporting role; developer role model. Production team-role design and sequence/function privilege coverage need more validation. |
-| 09 | PostgreSQL configuration | Practised | Inspected postgresql.conf, pg_hba.conf, pg_ident.conf; SHOW, ALTER SYSTEM, pg_settings, pg_file_settings; reload vs restart; work_mem session/database/role settings; max_connections restart and rollback; precedence and reset. |
-| 10 | Authentication and connectivity | In progress | Inspected live HBA rules: local socket uses peer; localhost IPv4/IPv6 TCP uses scram-sha-256; replication entries inspected. Peer/SCRAM tests, HBA first-match behaviour, host/hostssl/reject, remote connectivity, firewall/DNS/routing, TLS and app connectivity remain. |
-| 11 | Transactions and concurrency | Not started | BEGIN/COMMIT/ROLLBACK/savepoints, MVCC/XIDs, isolation levels, locks/blocking/deadlocks and long transactions. |
-| 12 | Storage and maintenance | Not started | Heap/pages/tuples/TOAST, indexes/bloat, VACUUM/ANALYZE/VACUUM FULL, autovacuum, statistics, wraparound and storage growth. |
-| 13 | PostgreSQL backup and restore | Not started | Logical/physical backups, pg_dump/pg_restore/pg_dumpall, pg_basebackup, restore scopes, validation, retention and restore drills. |
-| 14 | WAL and point-in-time recovery | Not started | WAL/checkpoints/archiving, archive_mode/archive_command, base backups, PITR, RPO/RTO and archive troubleshooting. |
-| 15 | Indexing and query optimization | Not started | Index types/design, selectivity, scans, EXPLAIN/ANALYZE, planner estimates and SQL/index tuning. |
-| 16 | PostgreSQL performance tuning | Not started | pg_stat views, pg_stat_statements, CPU/memory/I/O, tuning parameters, checkpoints, WAL, autovacuum, pooling and baselines. |
-| 17 | Monitoring and alerting | Not started | Logs, health checks, statistics, Prometheus/exporter/Grafana, alerting and capacity planning. |
-| 18 | Streaming replication | Not started | Primary/standby, physical replication, sync/async, slots, WAL retention, lag and standby recovery. |
-| 19 | Logical replication | Not started | Publications/subscriptions, initial sync, monitoring, schema limitations and migration use cases. |
-| 20 | High availability and failover | Not started | Switchover/failover, promotion, split-brain/fencing, Patroni, consensus, HAProxy, rejoin and consistency. |
-| 21 | Security and auditing | Not started | Least privilege, TLS/certs, secret rotation, audit logging/pgaudit, encryption and compliance reviews. |
-| 22 | Partitioning and advanced database design | Not started | Range/list/hash partitioning, pruning, maintenance/retention, partition indexes and large-table design. |
-| 23 | Upgrades, migration and capacity planning | Not started | Minor/major upgrades, pg_upgrade/logical migration, extension compatibility, rollback, capacity and cutover. |
-| 24 | Production troubleshooting and incident response | Not started | Service failures, connection exhaustion, slow queries, locks, disk/WAL/archive issues, replication/recovery incidents and RCA. |
-| 25 | Automation and DBA scripting | Not started | Bash/SQL checks, cron/systemd timers, backup automation, monitoring, logging, error handling and idempotency. |
-| 26 | Final PostgreSQL DBA project | Not started | End-to-end build, permissions, realistic workload, backup/recovery, replication/failover, dashboards, incident simulations and mock interview. |
+| 01 | Database fundamentals | In progress | Covered database/DBMS/RDBMS, database vs server vs instance, schema/table/row/column/types, OLTP/OLAP, primary/foreign keys, constraints and relationships. Current VILASLAB1 practical for departments/employees and deliberate constraint failures is pending review. Next: ACID, normalization and transactions; then PostgreSQL use cases/architecture overview. |
+| 02 | PostgreSQL installation and prerequisites | Historical Practised; current PG18 lab verify | PostgreSQL 17.11 installation was previously practised on CentOS Stream 9. Current VILASLAB1 PG18.4 service/version/path are known from the active learning thread. Revisit installation runbook, dependency handling, sizing, SELinux/firewall and rollback safely. |
+| 03 | PostgreSQL architecture | Partial | Basic architecture introduction and source reading. Deep process lifecycle, memory, WAL, MVCC, background workers, storage and query execution labs remain. |
+| 04 | psql and pgAdmin | Partial | psql connections, meta-commands and object inspection practised. pgAdmin server registration/query tool/monitoring lab remains unverified. |
+| 05 | SQL fundamentals | Partial | Basic table creation, inserts, selects, filters, sorting and aggregates have historical practice. Full SQL categories, NULL, GROUP BY/HAVING, joins and transaction labs remain. |
+| 06 | Advanced SQL and objects | Not started | Joins, subqueries, CTEs, recursive CTEs, window functions, views/materialized views, sequences/identity, functions/procedures/triggers, extensions, JSON/JSONB and arrays. |
+| 07 | Database/schema/tablespace administration | Historical Partial | Database/schema/table creation and search_path/ownership inspection practised in earlier lab. Tablespaces, dependencies, sizing, provisioning/decommissioning remain. |
+| 08 | Roles and privileges | Historical Practised | Earlier PG17 lab included role creation, membership, GRANT/REVOKE, default privileges and access tests. Repeat/verify in PG18 as needed; complete ownership and safe role cleanup. |
+| 09 | Configuration management | Historical Practised | Earlier PG17 lab included config inspection, SHOW/ALTER SYSTEM, reload/restart, parameter precedence and rollback. Revalidate version-specific behaviour on PG18. |
+| 10 | Authentication and connectivity | Historical In progress | Earlier PG17 HBA rules were inspected; peer/SCRAM login tests, first-match behaviour, remote access, firewall/DNS/routing, TLS and app connectivity remained. |
+| 11 | Transactions and concurrency | Not started | ACID, BEGIN/COMMIT/ROLLBACK/savepoints, MVCC, isolation, locks, deadlocks, long transactions and safe remediation. |
+| 12 | Storage and maintenance | Not started | Heap/pages/TOAST, indexes/bloat, VACUUM/ANALYZE/VACUUM FULL, autovacuum, statistics, wraparound and growth. |
+| 13 | Backup and restore | Not started | pg_dump/pg_restore/pg_dumpall, pg_basebackup, logical/physical strategy, object-level restore, validation and restore drills. |
+| 14 | WAL and PITR | Not started | WAL, checkpoints, archiving, base backups, PITR, RPO/RTO and archive troubleshooting. |
+| 15 | Indexing and query optimization | Not started | Index types/design, EXPLAIN/ANALYZE, scans, joins, planner statistics and query tuning. |
+| 16 | Performance diagnosis and tuning | Not started | pg_stat views, pg_stat_statements, CPU/memory/I/O, memory/connections/WAL/autovacuum/checkpoints and pooling. |
+| 17 | Monitoring and alerting | Not started | Logs, health checks, Prometheus/exporter/Grafana, pgBadger, alerting and capacity planning. |
+| 18 | Streaming replication | Not started | Physical replication, sync/async, slots, WAL retention, lag and standby recovery. |
+| 19 | Logical replication | Not started | Publisher/subscriber, publications/subscriptions, initial sync, schema limitations and migration. |
+| 20 | High availability and failover | Not started | Switchover/failover, fencing, split-brain prevention, Patroni, consensus, HAProxy, rejoin and failback. |
+| 21 | Security and auditing | Not started | Least privilege, TLS/certificates, RLS, pgaudit, secret rotation, encryption and compliance. |
+| 22 | Partitioning and large data design | Not started | Range/list/hash, pruning, indexes, retention, attach/detach and partition maintenance. |
+| 23 | Upgrades, migration and capacity planning | Not started | Minor/major upgrades, pg_upgrade, logical migration, extensions, validation, rollback and cutover. |
+| 24 | Production troubleshooting and incident response | Not started | Service, connection, query, lock, disk/WAL, archive, replication and recovery incidents; RCA. |
+| 25 | Automation and DBA scripting | Not started | Bash/SQL/Python checks, backup automation, cron/systemd timers, alerts, idempotency and error handling. |
+| 26 | Final PostgreSQL DBA project | Not started | Integrated build, permissions, realistic workload, tuning, backup/recovery, replication/failover, monitoring, incident simulations and mock interview. |
 
-## Confirmed practical evidence
+## Expanded coverage added from source review
 
-### Topic 07 — Database/schema
-- Created `dba_training` database and `dba_training` schema.
-- Created `public.students` and `dba_training.employees`.
-- Inspected ownership and schema search_path.
-- Configured database-level search_path and verified after reconnect.
-- Tablespace and size-management practicals not confirmed.
+The consolidated learning map adds explicit modules for:
+- PgBouncer and connection-pooling operations.
+- Replication-slot lifecycle and WAL-retention safeguards.
+- Cloud-managed PostgreSQL, Docker and Kubernetes/operator awareness.
+- PostgreSQL extension ecosystem, FDW, pgBackRest, Barman, pg_repack, pgBadger and pgaudit.
+- Linux/network/storage DBA foundations, operational runbooks, SLI/SLO and incident management.
 
-### Topic 08 — Roles/privileges
-- Created and tested `dba_user`.
-- Created `reporting_user` with read-oriented grants.
-- Created `developer_role` and `developer_user1`, verified membership.
-- Granted/revoked table permissions and tested allowed/denied DML.
-- Configured default privileges and tested a subsequently created table.
-- Proposed team roles `dba_team`, `developer_team`, `testing_team` are not confirmed as executed.
+See [CURRICULUM-REVIEW-AND-EXPANSION.md](CURRICULUM-REVIEW-AND-EXPANSION.md) for the full syllabus and source-document safety review.
 
-### Topic 09 — Configuration
-- Inspected configuration files and settings.
-- Changed work_mem using ALTER SYSTEM, reloaded, reset and reloaded.
-- Changed max_connections to 150, restarted as Linux root, verified, reset and restarted back to 100.
-- Practised session/database/role work_mem settings and precedence; removed test role/database overrides.
-- Observed values after cleanup: max_connections=100, shared_buffers=128MB, work_mem=4MB, maintenance_work_mem=64MB, effective_cache_size=4GB. Revalidate before production use; effective_cache_size is a planner estimate, not reserved memory.
+## Historical evidence from earlier PG17 lab
 
-### Topic 10 — Authentication
-Current non-comment HBA rules observed:
+- Created database/schema/tables and inspected object ownership/search_path.
+- Practised basic SQL and primary-key enforcement.
+- Created users/roles and tested table privileges.
+- Practised default privileges and role membership.
+- Inspected PostgreSQL configuration files and parameter precedence.
+- Changed/reverted selected test parameters, including a restart-required setting.
+- Inspected pg_hba.conf rules; connection tests remained pending.
 
-```conf
-local   all             all                                     peer
-host    all             all             127.0.0.1/32            scram-sha-256
-host    all             all             ::1/128                 scram-sha-256
-local   replication     all                                     peer
-host    replication     all             127.0.0.1/32            scram-sha-256
-host    replication     all             ::1/128                 scram-sha-256
-```
+Do not assume these commands were run on the current VILASLAB1 PG18.4 environment.
 
-The learner ran:
+## Current next action
 
-```bash
-grep -vE '^[[:space:]]*(#|$)' /var/lib/pgsql/17/data/pg_hba.conf
-```
+Complete the Topic 01 departments/employees practical in the current `dba_training` database on VILASLAB1. Review successful inserts and expected primary-key/foreign-key constraint failures before proceeding to ACID, normalization and transactions.
 
-The output confirms these configured rules. The actual peer and password login tests are still pending.
+## Completion standard
 
-## Interview preparation
-
-| Track | Status |
-|---|---|
-| Fundamentals/architecture | Basic coverage; structured revision needed |
-| SQL | Basic exercises; advanced SQL pending |
-| Administration/roles/configuration | Hands-on coverage |
-| Backup and recovery | Not started |
-| Performance/indexing | Not started |
-| Replication and HA | Not started |
-| Production support/RCA | Not started |
-| Senior DBA scenarios | Not started |
-
-## Next action
-
-Continue Topic 10:
-1. Test peer over Unix socket as Linux `postgres`.
-2. Test SCRAM over TCP using `127.0.0.1` and a lab login.
-3. Compare socket vs TCP.
-4. Learn HBA rule order before making any edits.
+A topic can be marked **Practised** only after commands are executed and outputs reviewed. Mark **Completed** only when all listed subtopics, validation checks, troubleshooting exercises and interview review are complete.
