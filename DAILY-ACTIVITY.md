@@ -72,3 +72,24 @@ Atomicity practical is Practised and verified. Topic 01 remains In progress; Con
 
 ### Next activity
 Continue ACID with Consistency, then Isolation and Durability.
+
+
+## 2026-11-27 — Topic 01 Lesson 1.10: Consistency practical verified
+
+**Environment:** VILASLAB1, PostgreSQL 18.4, database dba_training.
+
+### Practical completed and reviewed
+- Queried acid_accounts and confirmed Account A = 10000.00 and Account B = 5000.00.
+- An attempted CREATE TABLE returned relation already exists; this was harmless because the table had already been created in the Atomicity exercise.
+- Attempted to update Account A balance to -500. PostgreSQL rejected the update with check constraint violation for acid_accounts_balance_check.
+- Queried balances after the rejected update and confirmed both original balances remained unchanged.
+- Inspected the table using \\d acid_accounts and verified CHECK (balance >= 0::numeric), the primary key and NOT NULL account_name.
+
+### Outcome
+Consistency demonstrated: PostgreSQL enforced the table's non-negative balance rule and prevented invalid data from being stored. No corrective action was required.
+
+### Learning status
+Consistency practical is Practised and verified. Topic 01 remains In progress; Isolation, Durability, normalization and remaining fundamentals are pending.
+
+### Next activity
+Continue ACID with Isolation.
