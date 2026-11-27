@@ -113,3 +113,37 @@ The two-session Isolation lock-wait demonstration has not yet been captured. Ear
 
 ### Next activity
 Complete the Isolation lock-wait test and Durability commit/restart verification, reviewing actual terminal output before updating practical status.
+
+
+## 2026-11-27 — Topic 01 Lesson 1.10: Isolation lock wait observed; Durability restart practical verified
+
+**Environment:** VILASLAB1, PostgreSQL 18.4, database dba_training.
+
+### Isolation — evidence captured
+- Session A (backend PID 11328) began a transaction and updated account 1 by +100 without committing.
+- Session B (backend PID 11330) attempted to update the same row by -50.
+- From the monitoring query, pg_stat_activity showed PID 11330 as active with wait_event_type = Lock and wait_event = transactionid.
+- This confirms PostgreSQL blocked the second transaction while the first transaction held the conflicting row update.
+- The user later cancelled a blocked statement and issued BEGIN while a transaction was already active; PostgreSQL correctly warned that a transaction was already in progress. Some later transaction commands were mixed across sessions, so the clean Session A COMMIT → Session B resumes → Session B COMMIT sequence remains to be repeated.
+- Do not claim the final balance sequence as a clean isolation proof. The lock-wait observation itself is verified.
+
+### Durability — practical verified
+- Inserted and committed row (account_id=2, balance=20000.00) into isolation_demo.
+- Confirmed the row before restart.
+- Restarted service postgresql-18 from the root shell.
+- systemctl status confirmed the service returned to Active: active (running).
+- Reconnected to dba_training after restart and queried isolation_demo.
+- Confirmed both rows remained, including account_id=2 with balance 20000.00.
+
+**Conclusion:** The committed row survived a normal PostgreSQL service restart. This validates restart persistence, not a simulated crash or power-loss recovery test.
+
+### Operational note
+- sudo prompted for a password while logged in as the Linux postgres user and rejected the supplied attempts. The user switched back to root and successfully checked/restarted the service. PostgreSQL database credentials and Linux sudo authorization are separate.
+
+### Learning status
+- Isolation lock-wait observation: Practised and verified; clean two-session commit sequence remains.
+- Durability restart-persistence practical: Practised and verified.
+- Topic 01 remains In progress; normalization, PostgreSQL use cases and architecture overview remain.
+
+### Next activity
+Repeat the clean two-session Isolation completion sequence, then continue Topic 01 with normalization and PostgreSQL use cases/architecture overview.
