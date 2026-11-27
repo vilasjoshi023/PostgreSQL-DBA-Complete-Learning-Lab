@@ -39,3 +39,19 @@
 
 ## Completion evidence
 The constraints/relationships practical has been executed and output reviewed on the current PG18.4 lab. Keep Topic 01 marked in progress until the remaining syllabus, validation checks, troubleshooting exercises and interview review are complete.
+
+
+## ACID practical — Atomicity
+
+**Status: Practised and verified** on VILASLAB1 / PostgreSQL 18.4 / dba_training.
+
+- Created acid_accounts with a non-negative balance CHECK constraint.
+- Inserted two sample accounts with balances 10000.00 and 5000.00.
+- Used BEGIN, deducted 1000 from Account A and added 1000 to Account B.
+- Verified interim balances of 9000.00 and 6000.00 inside the transaction.
+- Executed ROLLBACK and verified that balances returned to 10000.00 and 5000.00.
+- The subsequent extra ROLLBACK warning was harmless because no transaction remained active.
+
+**Conclusion:** PostgreSQL rolled back both updates together, demonstrating Atomicity (all or nothing).
+
+Remaining ACID properties: Consistency, Isolation and Durability. Topic 01 remains In progress.
