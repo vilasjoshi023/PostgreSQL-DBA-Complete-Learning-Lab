@@ -31,9 +31,9 @@
 - employees.department_id: foreign key referencing departments.department_id.
 
 ## Still to practise
-- ACID properties with a transaction example.
+- Clean two-session Isolation completion sequence: Session A COMMIT, blocked Session B resumes, then Session B COMMIT. The lock-wait observation itself has been captured and verified.
 - Normalization examples (1NF, 2NF, 3NF).
-- BEGIN, COMMIT, ROLLBACK and SAVEPOINT.
+- SAVEPOINT and additional transaction-control practice.
 - OLTP vs OLAP examples and PostgreSQL use cases.
 - PostgreSQL architecture overview and practical implications.
 
@@ -54,7 +54,7 @@ The constraints/relationships practical has been executed and output reviewed on
 
 **Conclusion:** PostgreSQL rolled back both updates together, demonstrating Atomicity (all or nothing).
 
-Remaining ACID properties: Consistency, Isolation and Durability. Topic 01 remains In progress.
+Consistency, Isolation and Durability practical status is recorded below. Topic 01 remains In progress.
 
 
 ## ACID practical — Consistency
@@ -72,15 +72,27 @@ Remaining ACID properties: Consistency, Isolation and Durability. Topic 01 remai
 Remaining ACID properties: Isolation and Durability. Topic 01 remains In progress.
 
 
-## ACID practical — Durability lesson
+## ACID practical — Isolation
 
-**Concepts introduced; practical not yet verified** on VILASLAB1 / PostgreSQL 18.4.
+**Status: Lock-wait observation practised and verified; clean transaction completion sequence still pending** on VILASLAB1 / PostgreSQL 18.4.
 
-- Durability means committed changes should survive a database crash or restart.
-- PostgreSQL uses Write-Ahead Logging (WAL) to support crash recovery.
-- Under normal synchronous commit settings, required WAL records are flushed to durable storage before a successful commit is acknowledged.
-- During crash recovery, PostgreSQL replays WAL as needed.
+- Session A (PID 11328) held an uncommitted update to account 1.
+- Session B (PID 11330) attempted to update the same row.
+- pg_stat_activity showed PID 11330 as active with wait_event_type = Lock and wait_event = transactionid.
+- This confirms a real lock wait caused by the conflicting uncommitted transaction.
+- Later attempts included statement cancellation and nested BEGIN warnings; repeat the clean sequence once: commit Session A, allow Session B's update to finish, then commit Session B.
 
-**Pending lab:** Insert and commit a test row in isolation_demo, verify it, perform a controlled restart of the PostgreSQL 18 service, reconnect and verify the committed row remains. Awaiting actual user execution output; not marked practised.
+**Conclusion:** PostgreSQL enforces transaction isolation by making a conflicting update wait for the transaction holding the row lock.
 
-**Isolation status:** The two-session lock-wait practical is still pending; backend PIDs were identified, but the monitoring output did not capture a Lock wait.
+## ACID practical — Durability
+
+**Status: Practised and verified** on VILASLAB1 / PostgreSQL 18.4.
+
+- Inserted and committed (account_id=2, balance=20000.00) into isolation_demo.
+- Verified the row before restarting the PostgreSQL service.
+- Restarted postgresql-18 from the root shell and confirmed systemd reported Active: active (running).
+- Reconnected to dba_training and queried isolation_demo; account_id=2 with balance 20000.00 was still present.
+
+**Conclusion:** The committed row survived a normal service restart. This is a restart-persistence test, not a simulated crash or power-loss recovery test. PostgreSQL uses WAL to support crash recovery.
+
+**Remaining ACID follow-up:** Repeat the clean two-session Isolation commit sequence. Topic 01 remains In progress.
