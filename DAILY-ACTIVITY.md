@@ -49,3 +49,26 @@ Topic 01 remains In progress. This constraints/relationships practical is Practi
 
 ### Next activity
 Lesson 1.10 — ACID properties, normalization and transactions.
+
+
+## 2026-11-27 — Topic 01 Lesson 1.10: Atomicity practical verified
+
+**Environment:** VILASLAB1, PostgreSQL 18.4, database dba_training.
+
+### Practical completed and reviewed
+- Created acid_accounts with account_id primary key, account_name NOT NULL, and balance CHECK (balance >= 0).
+- Inserted Account A with 10000.00 and Account B with 5000.00.
+- Started a transaction using BEGIN.
+- Deducted 1000 from Account A and added 1000 to Account B; both UPDATE commands reported UPDATE 1.
+- Queried balances inside the transaction and observed 9000.00 and 6000.00.
+- Executed ROLLBACK and queried balances again; original values 10000.00 and 5000.00 were restored.
+- A second ROLLBACK produced the expected harmless warning that no transaction was in progress.
+
+### Outcome
+Atomicity demonstrated: both changes were rolled back as one unit. No transfer changes remained after rollback.
+
+### Learning status
+Atomicity practical is Practised and verified. Topic 01 remains In progress; Consistency, Isolation, Durability, normalization and remaining fundamentals are pending.
+
+### Next activity
+Continue ACID with Consistency, then Isolation and Durability.
