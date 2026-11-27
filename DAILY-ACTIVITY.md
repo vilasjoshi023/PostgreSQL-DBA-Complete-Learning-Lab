@@ -93,3 +93,23 @@ Consistency practical is Practised and verified. Topic 01 remains In progress; I
 
 ### Next activity
 Continue ACID with Isolation.
+
+
+## 2026-11-27 — Topic 01 Lesson 1.10: Durability lesson introduced; practical pending
+
+**Environment:** VILASLAB1, PostgreSQL 18.4, database dba_training.
+
+### Concepts covered
+- Durability means successfully committed changes should survive a database crash or restart.
+- PostgreSQL uses Write-Ahead Logging (WAL) to support crash recovery.
+- Under normal synchronous commit settings, PostgreSQL flushes the required WAL records to durable storage before acknowledging commit.
+- PostgreSQL can replay WAL during crash recovery; every modified table page does not need to be written before acknowledging each commit.
+
+### Practical status
+The proposed lab uses a committed test row in isolation_demo, followed by a controlled PostgreSQL 18 service restart and a query after reconnecting. The user has not yet supplied execution output. Do not mark Durability as practised or verified.
+
+### Other outstanding work
+The two-session Isolation lock-wait demonstration has not yet been captured. Earlier attempts showed two backend PIDs, but the pg_stat_activity output did not show a Lock wait; the sessions were observed after their commands had completed.
+
+### Next activity
+Complete the Isolation lock-wait test and Durability commit/restart verification, reviewing actual terminal output before updating practical status.
