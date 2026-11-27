@@ -27,3 +27,25 @@ Curriculum review documented. No new database lab practical was executed during 
 
 ### Next activity
 Complete the pending Topic 01 constraints/relationships lab, then continue with ACID, normalization and transactions.
+
+
+## 2026-11-27 — Topic 01 Lesson 1.9: constraints and relationships practical verified
+
+**Environment:** VILASLAB1, PostgreSQL 18.4, database dba_training.
+
+### Practical completed and reviewed
+- Queried departments: confirmed 3 rows (DBA, Developer, Testing).
+- Queried employees: confirmed 3 rows (Rahul, Priya, Amit).
+- Inspected \\d departments: confirmed primary key on department_id, unique constraint on department_name, and referenced-by foreign key fk_department.
+- Inspected \\d employees: confirmed primary key on employee_id, unique constraint on email, check constraint salary > 0, and foreign key fk_department to departments.
+- Deliberately attempted an employee insert with department_id=99; PostgreSQL correctly rejected it with a foreign-key violation because department 99 does not exist.
+- Deliberately attempted a duplicate department ID 10; PostgreSQL correctly rejected it with a primary-key duplicate-key violation.
+
+### Outcome
+All expected valid rows and constraint metadata were verified. The two errors were expected negative tests and demonstrate that PostgreSQL is enforcing referential integrity and uniqueness correctly. No corrective action was required.
+
+### Learning status
+Topic 01 remains In progress. This constraints/relationships practical is Practised and verified; ACID, normalization and transaction exercises remain.
+
+### Next activity
+Lesson 1.10 — ACID properties, normalization and transactions.
