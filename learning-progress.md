@@ -9,7 +9,7 @@
 
 | Level | Topics | Status snapshot |
 |---|---:|---|
-| Level 1 — Fundamentals and SQL | 01–06 | Topic 01 in progress; practical verification pending. Other historical topic evidence remains recorded below. |
+| Level 1 — Fundamentals and SQL | 01–06 | Topic 01 in progress; fundamentals and constraints practical verified. Other historical topic evidence remains recorded below. |
 | Level 2 — Core administration | 07–12 | Historical hands-on coverage exists for 07–10 in the earlier PG17 lab; Topic 10 connectivity tests were pending in that record. |
 | Level 3 — Backup, recovery and performance | 13–17 | Not started in the structured course |
 | Level 4 — Advanced and enterprise | 18–26 | Not started in the structured course |
@@ -20,7 +20,7 @@
 
 | # | Topic | Status | Evidence / remaining work |
 |---:|---|---|---|
-| 01 | Database fundamentals | In progress | Covered database/DBMS/RDBMS, database vs server vs instance, schema/table/row/column/types, OLTP/OLAP, primary/foreign keys, constraints and relationships. Current VILASLAB1 practical for departments/employees and deliberate constraint failures is pending review. Next: ACID, normalization and transactions; then PostgreSQL use cases/architecture overview. |
+| 01 | Database fundamentals | In progress | Covered database/DBMS/RDBMS, database vs server vs instance, schema/table/row/column/types, OLTP/OLAP, primary/foreign keys, constraints and relationships. On current VILASLAB1 PG18.4, created departments and employees, inserted 3 rows into each, verified PK/UNIQUE/NOT NULL/CHECK/FK metadata using \\d, and confirmed expected rejection of a nonexistent department FK and duplicate department PK. Next: ACID, normalization and transactions; then PostgreSQL use cases/architecture overview. |
 | 02 | PostgreSQL installation and prerequisites | Historical Practised; current PG18 lab verify | PostgreSQL 17.11 installation was previously practised on CentOS Stream 9. Current VILASLAB1 PG18.4 service/version/path are known from the active learning thread. Revisit installation runbook, dependency handling, sizing, SELinux/firewall and rollback safely. |
 | 03 | PostgreSQL architecture | Partial | Basic architecture introduction and source reading. Deep process lifecycle, memory, WAL, MVCC, background workers, storage and query execution labs remain. |
 | 04 | psql and pgAdmin | Partial | psql connections, meta-commands and object inspection practised. pgAdmin server registration/query tool/monitoring lab remains unverified. |
@@ -72,7 +72,7 @@ Do not assume these commands were run on the current VILASLAB1 PG18.4 environmen
 
 ## Current next action
 
-Complete the Topic 01 departments/employees practical in the current `dba_training` database on VILASLAB1. Review successful inserts and expected primary-key/foreign-key constraint failures before proceeding to ACID, normalization and transactions.
+Continue Topic 01 with ACID, normalization and transactions in the current dba_training database on VILASLAB1. The departments/employees constraints practical is verified.
 
 ## Completion standard
 
